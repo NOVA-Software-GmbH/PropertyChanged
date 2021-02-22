@@ -13,6 +13,7 @@ public partial class ModuleWeaver: BaseModuleWeaver
         ResolveSuppressWarningsConfig();
         ResolveSuppressOnPropertyNameChangedWarningConfig();
         ResolveEventInvokerName();
+        ResolveOnlyWeaveIWeaveINotifyPropertyChangedConfig();
         FindCoreReferences();
         FindInterceptor();
         ProcessFilterTypeAttributes();

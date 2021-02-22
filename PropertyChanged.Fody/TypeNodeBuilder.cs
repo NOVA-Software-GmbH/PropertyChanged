@@ -17,10 +17,15 @@ public partial class ModuleWeaver
         Func<TypeDefinition, bool> extraFilter =
             t => !NamespaceFilters.Any() || NamespaceFilters.Any(filter => Regex.IsMatch(t.FullName, filter));
 
+        Func<TypeDefinition, bool> onlyWeaveIWeaveINotifyPropertyChangedFilter =
+            t => !OnlyWeaveIWeaveINotifyPropertyChanged ||
+                 HierarchyImplementsIWeaveINotifyPropertyChanged(t);
+
         allClasses = ModuleDefinition
             .GetTypes()
             .Where(x => x.IsClass && x.BaseType != null)
             .Where(extraFilter)
+            .Where(onlyWeaveIWeaveINotifyPropertyChangedFilter)
             .ToList();
         Nodes = new List<TypeNode>();
         NotifyNodes = new List<TypeNode>();
