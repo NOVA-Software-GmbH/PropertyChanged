@@ -1,0 +1,40 @@
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+
+variables:
+  IS_MASTER: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+
+steps:
+  # Build
+
+  - script: dotnet build --configuration Release
+    displayName: "Build"
+
+  # Tests
+
+  - task: DotNetCoreCLI@2
+    displayName: "Unit Tests"
+    inputs:
+      command: "test"
+      arguments: "--no-build --configuration Release"
+      publishTestResults: true
+
+  # Deploy
+
+  - task: PublishBuildArtifacts@1
+    displayName: Pakete als Artefakte hochladen
+    inputs:
+      pathtoPublish: "nugets"
+
+  - task: NuGetCommand@2
+    displayName: Pakete in den NuGet Feed hochladen
+    condition: eq(variables.IS_MASTER, true)
+    inputs:
+      command: push
+      packagesToPush: "nugets/*.nupkg"
+      nuGetFeedType: internal
+      publishVstsFeed: c0c3a426-7344-44eb-b070-ded54aa61309
+      allowPackageConflicts: false
