@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using Fody;
 using Xunit;
 
@@ -9,7 +9,8 @@ public class AssemblyWithIWeaveINotifyPropertyChangedTests
     {
         var weavingTask = new ModuleWeaver();
         var testResult = weavingTask.ExecuteTestRun(
-            "AssemblyWithIWeaveINotifyPropertyChanged.dll");
+            "AssemblyWithIWeaveINotifyPropertyChanged.dll", 
+            runPeVerify: false);
 
         var assembly = testResult.Assembly;
         
@@ -28,7 +29,8 @@ public class AssemblyWithIWeaveINotifyPropertyChangedTests
         weavingTask.OnlyWeaveIWeaveINotifyPropertyChanged = true;
 
         var testResult = weavingTask.ExecuteTestRun(
-            "AssemblyWithIWeaveINotifyPropertyChanged.dll");
+            "AssemblyWithIWeaveINotifyPropertyChanged.dll",
+            runPeVerify: false);
 
         var assembly = testResult.Assembly;
 
