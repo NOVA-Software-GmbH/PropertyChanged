@@ -6,7 +6,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
     <Authors>Simon Cropp</Authors>
-    <Description>Add property notification to all classes that implement INotifyPropertyChanged.</Description>
+    <Description>Add property notification to all classes that implement INotifyPropertyChanged. Zusätzlich steht die Option "OnlyWeaveIWeaveINotifyPropertyChanged" zur Verfügung. In diesem Fall werden die "property notification" nur für Klassen durchgeführt die "IWeaveINotifyPropertyChanged" implementieren.</Description>
     <PackageTags>Xaml, MVVM, INotifyPropertyChanged, DataBinding, ILWeaving, Cecil</PackageTags>
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
     <PackageIconUrl>https://raw.githubusercontent.com/Fody/PropertyChanged/master/package_icon.png</PackageIconUrl>
