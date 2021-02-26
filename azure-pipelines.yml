@@ -8,15 +8,23 @@ variables:
   IS_MASTER: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 steps:
+  # Umgebung einrichten
+
+  - task: NuGetCommand@2
+    displayName: Restore
+    inputs:
+      command: restore
+      restoreSolution: "**/*.sln"
+
   # Build
 
   - script: dotnet build --configuration Release
-    displayName: "Build"
+    displayName: Build
 
   # Tests
 
   - task: DotNetCoreCLI@2
-    displayName: "Unit Tests"
+    displayName: Unit Tests
     inputs:
       command: "test"
       arguments: "--no-build --configuration Release"
